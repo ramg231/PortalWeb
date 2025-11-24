@@ -1,24 +1,39 @@
+import alcaldeImg from '@/assets/alcalde.png'
+
 const AlcaldeSection = () => {
   return (
-    <section className="bg-gray-50 py-14">
-      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+    <section className="relative bg-[#f5f7fb]  overflow-hidden">
 
-        <div className="flex justify-center">
-          <div className="w-64 h-80 bg-gray-200 rounded-xl shadow-md flex items-center justify-center">
-            <span className="text-gray-500">Foto del Alcalde</span>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
+        
+        {/* Imagen del alcalde */}
+        <div className="flex justify-center md:justify-start">
+          <img
+            src={alcaldeImg}
+            alt="Alcalde"
+            className="
+              w-[260px] md:w-[300px] lg:w-[340px]
+              object-contain drop-shadow-xl
+              -mt-6
+            "
+          />
         </div>
 
+        {/* Texto */}
         <div>
-          <p className="uppercase text-sm font-bold text-[#003566]">
+          <p className="uppercase text-sm font-bold text-[#003566] tracking-wide">
             Alcalde
           </p>
-          <h2 className="text-4xl font-extrabold text-[#001d3d] mt-1">
-            NOMBRE DEL ALCALDE
+
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#001d3d] leading-tight mt-1">
+            RAMON RICARDO GARAY LEON
           </h2>
 
-          <button className="mt-8 py-3 px-6 bg-[#003566] text-white rounded-full shadow hover:bg-[#014f86] transition">
-            Ver perfil →
+          {/* Linea decorativa */}
+          <div className="w-20 h-[3px] bg-[#003566] mt-4 mb-8"></div>
+
+          <button className="py-3 px-6 bg-[#003566] text-white font-semibold rounded-md hover:bg-[#014f86] transition">
+            Ir a sección →
           </button>
         </div>
 

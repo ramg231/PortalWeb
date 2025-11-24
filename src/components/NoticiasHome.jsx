@@ -3,28 +3,28 @@ import CardNoticia from '@/components/CardNoticia'
 const NoticiasHome = () => {
   const noticiasHome = [
     {
-      titulo: 'Operativo de limpieza en la Costanera',
-      fecha: '21/11/2024',
-      categoria: 'Municipal',
+      titulo: 'Celebramos a nuestros vecinos cumpleañeros de noviembre',
+      fecha: '23/11/2025',
+      categoria: 'Nota Informativa',
       resumen:
-        'Personal de limpieza pública realizó un operativo integral en la zona de la Costanera.',
-      imagen: '/demo/noticia1.jpg',
+        'Esta semana compartimos momentos especiales junto a cuatro queridos vecinos que celebraron un año más de vida.',
+      imagen: 'https://cdn.www.gob.pe/uploads/document/file/9042118/1296209-22.jpg',
     },
     {
-      titulo: 'Campaña de vacunación para adultos mayores',
-      fecha: '19/11/2024',
-      categoria: 'Salud',
+      titulo: '¡La Punta destaca a nivel nacional gracias a la estrategia Ponte en Modo Niñez!',
+      fecha: '21/11/2025',
+      categoria: 'Nota Informativa',
       resumen:
-        'Se realizó una campaña gratuita de vacunación en el frontis municipal.',
-      imagen: '/demo/noticia2.jpg',
+        '¡En nuestro distrito seguimos poniendo a la niñez en el centro!',
+      imagen: 'https://cdn.www.gob.pe/uploads/document/file/9042112/1296182-16.jpg',
     },
     {
-      titulo: 'Recreación familiar por aniversario distrital',
-      fecha: '17/11/2024',
-      categoria: 'Eventos',
+      titulo: 'Formando conciencia ambiental',
+      fecha: '21/11/2025',
+      categoria: 'Nota Informativa',
       resumen:
-        'Vecinos participaron de actividades deportivas, culturales y recreativas.',
-      imagen: '/demo/noticia3.jpg',
+        'Los alumnos del Colegio Clara Cogorno tuvieron la oportunidad de recibir una charla informativa y didáctica, como parte de las actividades de la campaña Recicla Ya.',
+      imagen: 'https://cdn.www.gob.pe/uploads/document/file/9042107/1296175-11.jpg',
     },
   ]
 
