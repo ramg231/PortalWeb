@@ -23,30 +23,12 @@ const menuItems = [
     ],
   },
   {
-    label: 'SEGURIDAD CIUDADANA',
-    items: [
-      'Serenazgo',
-      'Mapas del delito',
-      'Teléfonos de emergencia',
-      'Reporte ciudadano',
-    ],
-  },
-  {
     label: 'TURISMO',
     items: [
       'Atractivos',
       'Playas',
       'Historia del distrito',
       'Actividades recreativas',
-    ],
-  },
-  {
-    label: 'TRANSPARENCIA',
-    items: [
-      'Portal de Transparencia',
-      'Ordenanzas',
-      'Documentos de Gestión',
-      'Presupuesto',
     ],
   },
   {
@@ -57,34 +39,31 @@ const menuItems = [
 
 const Navbar = () => {
   const [openIndex, setOpenIndex] = useState(null)
-
+  //bg-[#003566]
   return (
-    <nav className="w-full bg-[#003566] text-white font-semibold relative z-50 shadow">
+    <nav className="w-full bg-white text-[#005c98] font-semibold relative z-50 shadow">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
 
-        <ul className="hidden md:flex gap-6 text-sm">
+        <ul className="hidden  md:flex gap-6 text-sm">
           {menuItems.map((m, idx) => (
             <li
               key={idx}
-              onMouseEnter={() => setOpenIndex(idx)}
-              onMouseLeave={() => setOpenIndex(null)}
-              className="py-4 cursor-pointer relative"
+              className="py-4 cursor-pointer relative group"
             >
               <span>{m.label}</span>
 
-              {openIndex === idx && (
-                <div className="absolute left-0 top-full mt-2 bg-white text-[#003566] rounded-lg shadow-xl w-64 p-3">
-                  {m.items.map((sub, sidx) => (
-                    <button
-                      key={sidx}
-                      className="w-full text-left text-sm px-3 py-2 hover:bg-gray-100 rounded-md"
-                    >
-                      {sub}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="absolute left-0 top-full mt-0 bg-white text-[#003566] rounded-lg shadow-xl w-64 p-3 hidden group-hover:block">
+                {m.items.map((sub, sidx) => (
+                  <button
+                    key={sidx}
+                    className="w-full text-left text-sm px-3 py-2 hover:bg-gray-100 rounded-md"
+                  >
+                    {sub}
+                  </button>
+                ))}
+              </div>
             </li>
+
           ))}
         </ul>
 

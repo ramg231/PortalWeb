@@ -2,7 +2,7 @@ import alcaldeImg from '@/assets/alcalde.png'
 
 const AlcaldeSection = () => {
   return (
-    <section className="relative bg-[#f5f7fb]  overflow-hidden">
+    <section className="relative bg-gradient-to-r from-[#005c98] via-[#18a4a9] to-[#e3ab26]  overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
         
@@ -21,11 +21,11 @@ const AlcaldeSection = () => {
 
         {/* Texto */}
         <div>
-          <p className="uppercase text-sm font-bold text-[#003566] tracking-wide">
+          <p className="uppercase text-lg font-bold text-white tracking-wide">
             Alcalde
           </p>
 
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#001d3d] leading-tight mt-1">
+          <h2 className="text-3xl md:text-6xl font-extrabold text-white leading-tight mt-1">
             RAMON RICARDO GARAY LEON
           </h2>
 
