@@ -6,7 +6,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    port: 3000,
+    port: 3037,
     open: true, // abre automáticamente http://localhost:3000
   },
   resolve: {
