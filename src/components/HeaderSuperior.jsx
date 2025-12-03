@@ -2,6 +2,7 @@ import logoPunta from '@/assets/logo_mdlp2.png'
 import transparenciaLogo from '@/assets/transparencia.png'
 import gobLogo from '@/assets/logo_gobpe.png'
 import fraseLogo from '@/assets/wefrase.png'
+import { Link } from "react-router-dom";
 
 const HeaderSuperior = () => {
   return (
@@ -10,17 +11,22 @@ const HeaderSuperior = () => {
 
         {/* LOGO MUNICIPALIDAD DE LA PUNTA */}
         <div className="flex items-center gap-3">
-          <img
-            src={logoPunta}
-            alt="Municipalidad La Punta"
-            className="h-20 object-contain filter brightness-110 contrast-125"
-          />
-          <img
-            src={fraseLogo}
-            alt="Frase Municipalidad La Punta"
-            className="h-11 object-contain filter brightness-120 contrast-125"
+          <Link to="/">
+            <img
+              src={logoPunta}
+              alt="Municipalidad La Punta"
+              className="h-20 object-contain filter brightness-110 contrast-125 cursor-pointer"
+            />
+          </Link>
 
-          />
+          <Link to="/">
+            <img
+              src={fraseLogo}
+              alt="Frase Municipalidad La Punta"
+              className="h-11 object-contain filter brightness-120 contrast-125 cursor-pointer"
+            />
+          </Link>
+
 
 
           {/* 
@@ -41,7 +47,7 @@ const HeaderSuperior = () => {
           <a
             href="https://www.gob.pe/munilapunta"
             target="_blank"
-         
+
           >
             <img
               src={gobLogo}
@@ -54,7 +60,7 @@ const HeaderSuperior = () => {
           <a
             href="https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=10941"
             target="_blank"
-         
+
           >
             <img
               src={transparenciaLogo}

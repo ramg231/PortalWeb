@@ -11,6 +11,10 @@ import Transparencia from '@/pages/Transparencia'
 import Noticias from '@/pages/Noticias'
 import NoticiaDetalle from '@/pages/NoticiaDetalle'
 import Contacto from '@/pages/Contacto'
+import Campanias from '@/pages/Campanias'
+import CampaniaDetalle from '@/pages/CampaniaDetalle'
+import Alcalde from '@/pages/Alcalde'
+import Adopta from '@/pages/Adopta'
 
 const App = () => {
   return (
@@ -28,6 +32,10 @@ const App = () => {
           <Route path="transparencia" element={<Transparencia />} />
           <Route path="noticias" element={<Noticias />} />
           <Route path="noticias/:id" element={<NoticiaDetalle />} />
+          <Route path="campanias" element={<Campanias />} />
+          <Route path="campanias/:id" element={<CampaniaDetalle />} />
+          <Route path="alcalde" element={<Alcalde />} />
+          <Route path="adopta" element={<Adopta />} />
           <Route path="contacto" element={<Contacto />} />
         </Route>
       </Routes>

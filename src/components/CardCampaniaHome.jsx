@@ -1,9 +1,12 @@
-const CardCampaniaHome = ({ titulo, fecha, imagen }) => {
+import { Link } from "react-router-dom";
+
+const CardCampaniaHome = ({ id, titulo, fecha, imagen }) => {
   return (
-    <div
+    <Link
+      to={`/campanias/${id}`}
       className="
         bg-white rounded-2xl overflow-hidden shadow-md
-        transition-all duration-300 hover:shadow-xl cursor-pointer
+        transition-all duration-300 hover:shadow-xl cursor-pointer block
       "
     >
       {/* Imagen */}
@@ -19,20 +22,15 @@ const CardCampaniaHome = ({ titulo, fecha, imagen }) => {
       <div className="p-5">
         <p className="text-sm text-gray-500">{fecha}</p>
 
-        <h3
-          className="
-            mt-1 text-lg font-bold text-[#003566]
-            leading-tight line-clamp-3
-          "
-        >
+        <h3 className="mt-1 text-lg font-bold text-[#003566] line-clamp-3">
           {titulo}
         </h3>
 
-        <button className="mt-3 text-sm text-[#005c98] font-semibold hover:underline">
+        <span className="mt-3 text-sm text-[#005c98] font-semibold hover:underline inline-block">
           Ver más →
-        </button>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 };
 

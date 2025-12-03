@@ -1,41 +1,116 @@
-import CardCampania from '@/components/CardCampania'
+import { useState } from "react";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { LayoutGrid, List } from "lucide-react";
+import { Link } from "react-router-dom";
+
+import CardCampania from "@/components/CardCampania";
+import { campaniasDemo } from "@/data/campaniasDemo";
 
 const Campanias = () => {
-
-  const campaniasDemo = [
-    {
-      titulo: "Campaña de Vacunación en La Punta",
-      fecha: "21/11/2024",
-      resumen: "Vacunación gratuita para niños y adultos mayores en el frontis municipal.",
-      imagen: "/demo/campania1.jpg",
-    },
-    {
-      titulo: "Campaña de Donación de Sangre",
-      fecha: "18/11/2024",
-      resumen: "Jornada de donación realizada en coordinación con el Ministerio de Salud.",
-      imagen: "/demo/campania2.jpg",
-    },
-    {
-      titulo: "Campaña de Limpieza Costera",
-      fecha: "15/11/2024",
-      resumen: "Vecinos se unieron para la limpieza del litoral y conservación ambiental.",
-      imagen: "/demo/campania3.jpg",
-    },
-  ]
+  const [vista, setVista] = useState("grid");
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-14">
-      <h1 className="text-4xl font-bold text-[#003566] mb-10">
-        Campañas
-      </h1>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {campaniasDemo.map((c, idx) => (
-          <CardCampania key={idx} {...c} />
-        ))}
+      <Breadcrumbs
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Campañas" },
+        ]}
+      />
+
+      {/* Encabezado */}
+      <div className="flex items-center justify-between mb-10">
+        <div>
+          <h1 className="text-4xl font-bold text-[#003566]">
+            Campañas
+          </h1>
+          <p className="text-gray-600 text-sm">
+            Conoce las campañas municipales más recientes
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setVista("grid")}
+            className={`p-2 rounded-xl border ${
+              vista === "grid"
+                ? "bg-[#003566] text-white"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            <LayoutGrid size={20} />
+          </button>
+
+          <button
+            onClick={() => setVista("list")}
+            className={`p-2 rounded-xl border ${
+              vista === "list"
+                ? "bg-[#003566] text-white"
+                : "text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            <List size={20} />
+          </button>
+        </div>
       </div>
-    </div>
-  )
-}
 
-export default Campanias
+      {/* GRID */}
+      {vista === "grid" && (
+        <div className="grid md:grid-cols-3 gap-6">
+          {campaniasDemo.map((c) => (
+            <Link to={`/campanias/${c.id}`} key={c.id}>
+              <CardCampania
+                id={c.id}
+                titulo={c.titulo}
+                resumen={c.resumen}
+                fecha={c.fecha}
+                categoria={c.categoria}
+                imagen={c.imagenPrincipal.url}
+              />
+            </Link>
+          ))}
+        </div>
+      )}
+
+      {/* LISTA */}
+      {vista === "list" && (
+        <div className="flex flex-col gap-6">
+          {campaniasDemo.map((c, i) => (
+            <Link
+              key={c.id}
+              to={`/campanias/${c.id}`}
+              className="p-6 rounded-xl border hover:bg-gray-50 transition block"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-gray-500">
+                    {String(i + 1).padStart(2, "0")} • {c.categoria}
+                  </span>
+
+                  <h2 className="text-xl font-semibold mt-1">
+                    {c.titulo}
+                  </h2>
+
+                  <div
+                    className="text-gray-600 text-sm mt-2 line-clamp-3 text-justify"
+                    dangerouslySetInnerHTML={{ __html: c.resumen }}
+                  ></div>
+
+                  <div className="flex gap-4 mt-3 text-sm text-gray-500">
+                    <span>{c.fecha}</span>
+                    <span>{c.autor}</span>
+                  </div>
+                </div>
+
+                <span className="text-gray-400">→</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Campanias;

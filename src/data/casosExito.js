@@ -1,0 +1,27 @@
+export const casosExito = [
+  [
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%201.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%202.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%203.jpeg"
+  ],
+  [
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%204.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%205.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%206.jpeg"
+  ],
+  [
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%207.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%208.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2010.png"
+  ],
+  [
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2011.png",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2012.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2013.png"
+  ],
+  [
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2014.jpeg",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2015.png",
+    "https://www.munilapunta.gob.pe/img/mascotas/casos_exito/C.E%2016.jpeg"
+  ]
+];

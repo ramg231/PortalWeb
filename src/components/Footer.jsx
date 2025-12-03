@@ -1,6 +1,6 @@
 import logoPunta from '@/assets/logo_mdlp2.png'
 import fraseLogo from '@/assets/wefrase.png'
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-[#005c98] via-[#18a4a9] to-[#e3ab26] text-white py-12">
@@ -8,24 +8,24 @@ const Footer = () => {
 
         {/* BLOQUE IZQUIERDO - LOGO + FRASE EN HORIZONTAL */}
         <div className="flex items-center gap-6">
-
+            <Link to="/">
           {/* FRASE */}
           <img
             src={fraseLogo}
             alt="Frase Municipalidad La Punta"
             className="h-14 object-contain filter brightness-120 contrast-125"
           />
-
+          </Link> 
           {/* SEPARADOR VERTICAL */}
           <div className="h-16 w-[2px] bg-white/60" />
-
+             <Link to="/">
           {/* ESCUDO */}
           <img
             src={logoPunta}
             alt="Municipalidad La Punta"
             className="h-20 object-contain filter brightness-110 contrast-125"
           />
-
+          </Link> 
         </div>
 
         {/* CONTACTO */}
