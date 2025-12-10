@@ -38,8 +38,10 @@ const Footer = () => {
         {/* EMERGENCIAS */}
         <div>
           <h3 className="font-semibold mb-3">Emergencias</h3>
-          <p className="text-sm">Serenazgo: 999 999 999</p>
-          <p className="text-sm">Defensa Civil: 955 555 555</p>
+          <p className="text-sm">Central Seguridad: 960 997 860</p>
+          <p className="text-sm">Centro médico: 453-1474</p>
+          <p className="text-sm">Comisaria de La Punta : 429-0512</p>
+          <p className="text-sm">Citas centro médico: 960 738 325</p>
         </div>
 
       </div>

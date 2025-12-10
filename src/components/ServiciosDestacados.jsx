@@ -3,6 +3,8 @@ import CardServicio from './CardServicio'
 import iconMesaPartes from '@/assets/servicios/mesapartes.png'
 import iconLibro from '@/assets/servicios/reclamos.png'
 import iconPagos from '@/assets/servicios/pglinea.png'
+import iconMedico from '@/assets/servicios/cmp.png'
+import  iconAdogta from '@/assets/servicios/adogta.png'
 
 const servicios = [
   {
@@ -19,6 +21,16 @@ const servicios = [
     title: 'PAGOS EN LÍNEA',
     iconPng: iconPagos,
     link: "https://pagosenlinea.munilapunta.gob.pe/Cuenta/Login",
+  },
+   {
+    title: 'CENTRO MEDICO MUNICIPAL',
+    iconPng: iconMedico,
+    link: "/centro-medico",
+  },
+   {
+    title: 'ADOGTA UN AMIGO',
+    iconPng: iconAdogta,
+    link: "/adopta-amigo",
   },
 ]
 
