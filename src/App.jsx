@@ -16,6 +16,8 @@ import CampaniaDetalle from '@/pages/CampaniaDetalle'
 import Alcalde from '@/pages/Alcalde'
 import Adopta from '@/pages/Adopta'
 import CentroMedico from '@/pages/CentroMedico'
+import ControlInterno from '@/pages/ControlInterno'
+import NormasEmitidas from '@/pages/NormasEmitidas'
 
 const App = () => {
   return (
@@ -38,6 +40,8 @@ const App = () => {
           <Route path="alcalde" element={<Alcalde />} />
           <Route path="adopta-amigo" element={<Adopta />} />
           <Route path="centro-medico" element={<CentroMedico />} />
+          <Route path="control-interno" element={<ControlInterno />} />
+          <Route path="directivas" element={<NormasEmitidas />} />
         </Route>
       </Routes>
     </>

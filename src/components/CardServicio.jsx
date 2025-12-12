@@ -1,16 +1,31 @@
-const CardServicio = ({ title, iconPng, link }) => {
+const sizeMap = {
+  10: "w-10 h-10",
+  12: "w-12 h-12",
+  14: "w-14 h-14",
+  16: "w-16 h-16",
+  20: "w-20 h-20",
+}
+
+const CardServicio = ({
+  title,
+  iconPng,
+  link,
+  iconSize = 14,
+}) => {
+  const sizeClass = sizeMap[iconSize] || sizeMap[14]
+
   return (
     <a
       href={link}
-      target="_blank"
+      target={link?.startsWith("http") ? "_blank" : "_self"}
       rel="noopener noreferrer"
       className="block cursor-pointer no-underline"
     >
       <div
         className="
           group relative rounded-2xl p-[2px]
-          transition-all duration-300
           border border-slate-200
+          transition-all duration-300
           hover:border-transparent
           hover:bg-gradient-to-r
           hover:from-[#005c98]
@@ -18,31 +33,23 @@ const CardServicio = ({ title, iconPng, link }) => {
           hover:to-[#e3ab26]
         "
       >
-        {/* CARD INTERNO */}
         <div
           className="
             rounded-2xl bg-white
-            p-10 h-28 flex items-center justify-between
-            transition-all duration-300 group-hover:shadow-md
+            p-6 h-28 flex items-center justify-between
+            transition-all duration-300
+            group-hover:shadow-md
           "
         >
-          <h3 className="text-xl font-extrabold text-slate-800">
+          <h3 className="text-[15px] font-extrabold text-slate-800 w-2/3 leading-tight">
             {title}
           </h3>
 
-          <div
-            className="
-              bg-white
-              w-16 h-16 rounded-xl flex items-center justify-center
-              transition-all duration-300 group-hover:scale-105
-            "
-          >
-            <img
-              src={iconPng}
-              alt={title}
-              className="w-16 h-16 object-contain"
-            />
-          </div>
+          <img
+            src={iconPng}
+            alt={title}
+            className={`${sizeClass} object-contain transition-transform duration-300 group-hover:scale-105`}
+          />
         </div>
       </div>
     </a>

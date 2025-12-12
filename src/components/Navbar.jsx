@@ -6,24 +6,24 @@ const menuItems = [
     link: null,
     items: [
       {
-        label: 'Historia',
+        label: 'HISTORIA',
         link: 'https://www.gob.pe/institucion/munilapunta/informes-publicaciones/5135948-historia-de-la-punta-mdlp',
       },
       {
-        label: 'Visión y Misión',
+        label: 'VISIÓN Y MISIÓN',
         link: 'https://www.gob.pe/institucion/munilapunta/institucional',
       },
       {
-        label: 'Organigrama',
-        link: 'https://s3.amazonaws.com/documentos.api.gob.pe/ni1tynd2359k83u05d2pkkeoypq2?response-content-disposition=inline%3B%20filename%3D%22estructura_organica_mdlp.pdf%22%3B%20filename%2A%3DUTF-8%27%27estructura_organica_mdlp.pdf&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJREKOSPKMJFYJDAQ%2F20251206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251206T202712Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=7a2e1c468d0140ed0cbd932115be1d030f45ab187e285bac371982634825d048',
+        label: 'ORGANIGRAMA',
+        link: 'https://drive.google.com/file/d/1AQEKJaN_1jTsf8XuLth_TgHdvWD07d3V/view?usp=sharing',
       },
-      { label: 'Alcalde', link: '/alcalde' },
+      { label: 'ALCALDE', link: '/alcalde' },
       {
-        label: 'Directorio',
+        label: 'DIRECTORIO',
         link: 'https://www.gob.pe/institucion/munilapunta/funcionarios',
       },
       {
-        label: 'Sedes',
+        label: 'SEDES',
         link: 'https://www.gob.pe/institucion/munilapunta/sedes',
       },
     ],
@@ -56,8 +56,72 @@ const menuItems = [
     items: [],
   },
   {
+    label: 'DIFUSION INSTITUCIONAL',
+    link: null,
+    items: [
+      {
+        label: 'GUIA TURÍSTICA',
+        link: 'https://www.gob.pe/institucion/munilapunta/informes-publicaciones/7496995'
+      },
+      {
+        label: 'PLAN VERANO',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/31464-planes-de-verano-mdlp'
+      },
+      {
+        label: 'PLAN TSUNAMI',
+        link: 'https://drive.google.com/file/d/1i3Gfb7IbiMyFOwnO5TNxW3wxA4G4pZMW/view?usp=sharing'
+      },
+      {
+        label: 'SISTEMA DE SEGURIDAD Y SALUD EN EL TRABAJO',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/62322-sistema-de-seguridad-y-salud-en-el-trabajo-mdlp'
+      },
+      {
+        label: 'REVISTAS INFORMATIVAS',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/30674-revistas-informativas-mdlp',
+      },
+      {
+        label: 'TRANSITO A SERVIR',
+        link: 'https://s3.amazonaws.com/documentos.api.gob.pe/ni1tynd2359k83u05d2pkkeoypq2?response-content-disposition=inline%3B%20filename%3D%22estructura_organica_mdlp.pdf%22%3B%20filename%2A%3DUTF-8%27%27estructura_organica_mdlp.pdf&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJREKOSPKMJFYJDAQ%2F20251206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251206T202712Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=7a2e1c468d0140ed0cbd932115be1d030f45ab187e285bac371982634825d048',
+      },
+     
+      {
+        label: 'TRANSFERENCIA DE GESTION',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/78630',
+      },
+             {
+        label: 'JUNTAS VECINALES COMUNALES',
+        link: 'https://www.gob.pe/institucion/munilapunta/sedes',
+      },
+       {
+        label: 'SUBASTA PÚBLICA',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/26653-subasta-publica',
+      },
+       {
+        label: 'BALANCE SEMESTRALES - FISCALIZACIÓN',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/31529-balance-semestral-de-los-regidores-municipales-fiscalizacion',
+      },
+       {
+        label: 'COMITÉ DE SEGURIDAD Y SALUD EN EL TRABAJO',
+        link: 'https://www.gob.pe/institucion/munilapunta/sedes',
+      },
+      {
+        label: 'COMITÉ DE PLANIFICACION DE LA CAPACITACIÓN CPC',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/52352-elecciones-del-representante-titular-y-suplemente-de-los-as-servidores-as-para-conformacion-del-comite-de-planificacion-de-la-capacitacion-de-la-mdlp-2024-2027',
+      },
+      {
+        label: 'AUDIENCIAS PÚBLICAS',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/69713-audiencias-publicas-mdlp',
+      },
+    ],
+  },
+  {
     label: 'NOTICIAS',
     link: '/noticias',
+    items: null,
+  },
+  {
+    label: 'CONTACTANOS',
+    link: 'https://www.gob.pe/institucion/munilapunta/contacto-y-numeros-de-emergencias ',
     items: null,
   },
 ]
