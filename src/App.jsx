@@ -18,7 +18,9 @@ import Adopta from '@/pages/Adopta'
 import CentroMedico from '@/pages/CentroMedico'
 import ControlInterno from '@/pages/ControlInterno'
 import NormasEmitidas from '@/pages/NormasEmitidas'
-
+import TributosArbitrios from '@/pages/TributosArbitrios'
+import LicenciasFuncionamiento from '@/pages/LicenciasFuncionamiento'
+import LicenciasEdificacion from '@/pages/LicenciasEdificacion'
 const App = () => {
   return (
     <>
@@ -42,6 +44,9 @@ const App = () => {
           <Route path="centro-medico" element={<CentroMedico />} />
           <Route path="control-interno" element={<ControlInterno />} />
           <Route path="directivas" element={<NormasEmitidas />} />
+          <Route path="tributos" element={<TributosArbitrios />} />
+          <Route path="licencias-funcionamiento" element={<LicenciasFuncionamiento />} />
+          <Route path="licencias-edificacion" element={<LicenciasEdificacion />} />
         </Route>
       </Routes>
     </>
