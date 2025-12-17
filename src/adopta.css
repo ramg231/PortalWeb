@@ -1,10 +1,32 @@
 body {
   background-color: #f2f2f2;
 }
+.adopta-titulos h1 {
+  color: #1793c6;      /* Azul similar al de la imagen */
+  font-size: 2.5em;    /* Tamaño grande */
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  letter-spacing: 1px;
+}
 
-h1, h2, h3, h4 {
+.adopta-titulos h3 {
+  color: #4b8b3b;      /* Verde similar al de la imagen */
+  font-size: 1.6em;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+
+
+
+h1, h2{
   font-family: Arial, sans-serif;
 }
+ h4 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #0b5de9;
+ }
+
 .canes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -192,4 +214,17 @@ h1, h2, h3, h4 {
 .custom-indicators li.active {
   background: #4a4a4a;
   transform: scale(1.2);
+}
+
+.subtitulo-franja {
+  background-color: #e6edf7; /* azul claro */
+  border-left: 6px solid #1f3c88; /* azul más fuerte */
+  padding: 12px 16px;
+}
+
+.subtitulo-franja h4 {
+  margin: 0;
+  font-weight: 700;
+  color: #1f3c88;
+  text-transform: uppercase;
 }

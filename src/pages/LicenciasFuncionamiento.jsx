@@ -1,10 +1,19 @@
 import PanelDocumentos from "@/components/PanelDocumentos";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { dataLicenciasFuncionamiento } from "@/data/dataLicenciasFuncionamiento";
 
 const LicenciasFuncionamiento = () => {
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
-      <header className="mb-8">
+
+      <Breadcrumbs
+        items={[
+          { label: "Inicio", href: "/" },
+          { label: "Licencias de Funcionamiento" }
+        ]}
+      />
+
+      <header className="mb-8 mt-4">
         <h1 className="text-2xl font-bold text-[#003566]">
           Licencias de Funcionamiento
         </h1>

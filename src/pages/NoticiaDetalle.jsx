@@ -1,7 +1,10 @@
 import { useParams } from "react-router-dom";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import Breadcrumbs from "@/components/Breadcrumbs";
+import ModalGaleria from "@/components/ModalGaleria";
+
 
 import { noticiasDemo } from "@/data/noticiasDemo";
 
@@ -9,7 +12,9 @@ const NoticiaDetalle = () => {
   const { id } = useParams();
 
   const noticia = noticiasDemo.find((n) => n.id === Number(id));
+
   const [index, setIndex] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
 
   if (!noticia) return <p>Noticia no encontrada</p>;
 
@@ -17,11 +22,14 @@ const NoticiaDetalle = () => {
     setIndex((prev) => (prev + 1) % noticia.galeria.length);
 
   const anterior = () =>
-    setIndex((prev) => (prev === 0 ? noticia.galeria.length - 1 : prev - 1));
+    setIndex((prev) =>
+      prev === 0 ? noticia.galeria.length - 1 : prev - 1
+    );
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-14">
 
+      {/* Breadcrumbs */}
       <Breadcrumbs
         items={[
           { label: "Inicio", href: "/" },
@@ -31,7 +39,7 @@ const NoticiaDetalle = () => {
       />
 
       {/* Categoría */}
-      <span className="px-3 py-1 bg-[#003566] text-white rounded-full text-xs">
+      <span className="inline-block px-3 py-1 bg-[#003566] text-white rounded-full text-xs mt-4">
         {noticia.categoria}
       </span>
 
@@ -47,51 +55,70 @@ const NoticiaDetalle = () => {
         <span>{noticia.autor}</span>
       </p>
 
-      {/* --- SLIDER --- */}
+      {/* --- SLIDER PRINCIPAL --- */}
       <div className="relative mb-6">
         <img
-          src={noticia.galeria[index].url} // ✔ galería
-          className="w-full h-96 object-cover rounded-xl"
+          src={noticia.galeria[index].url}
+          onClick={() => setOpenModal(true)}
+          className="w-full h-96 object-cover rounded-xl cursor-pointer"
         />
 
-        <button
-          onClick={anterior}
-          className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
-        >
-          <ChevronLeft size={20} />
-        </button>
+        {noticia.galeria.length > 1 && (
+          <>
+            <button
+              onClick={anterior}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
+            >
+              <ChevronLeft size={20} />
+            </button>
 
-        <button
-          onClick={siguiente}
-          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
-        >
-          <ChevronRight size={20} />
-        </button>
+            <button
+              onClick={siguiente}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </>
+        )}
       </div>
 
-      {/* Miniaturas */}
-      <div className="flex gap-3 mb-10">
+      {/* --- MINIATURAS --- */}
+      <div className="flex gap-3 mb-10 flex-wrap">
         {noticia.galeria.map((img, i) => (
           <img
             key={i}
             src={img.url}
             onClick={() => setIndex(i)}
-            className={`w-28 h-20 object-cover rounded-lg cursor-pointer border ${
-              i === index ? "border-[#003566]" : "border-transparent opacity-60"
-            }`}
+            className={`w-28 h-20 object-cover rounded-lg cursor-pointer border transition ${i === index
+              ? "border-[#003566]"
+              : "border-transparent opacity-60 hover:opacity-100"
+              }`}
           />
         ))}
       </div>
 
-      {/* Contenido */}
+      {/* --- CONTENIDO --- */}
       <article
         className="
           prose prose-gray max-w-none
-          prose-p:text-justify prose-li:text-justify prose-h3:text-[#003566]
+          prose-p:text-justify
+          prose-li:text-justify
+          prose-h3:text-[#003566]
           prose-p:leading-relaxed
         "
         dangerouslySetInnerHTML={{ __html: noticia.contenido }}
-      ></article>
+      />
+
+      {/* --- MODAL IMAGENES --- */}
+      {openModal && (
+        <ModalGaleria
+          imagenes={noticia.galeria.map(img => img.url)}
+          initialIndex={index}
+          onClose={() => setOpenModal(false)}
+        />
+      )}
+
+
     </div>
   );
 };

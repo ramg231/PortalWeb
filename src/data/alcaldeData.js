@@ -22,20 +22,21 @@ export const alcaldeData = {
   ],
 
   enlaces: [
-    {
+  /*  {
       titulo: "Hoja de Vida (PDF)",
       descripcion: "Documento oficial con formación y experiencia.",
       url: "#"
-    },
+    }*/,
     {
       titulo: "Declaración Jurada",
       descripcion: "Información pública de transparencia.",
-      url: "#"
+      url: "https://appdji.contraloria.gob.pe/djic/ConsultaPublicaDJIC.aspx?documento=25674843"
     },
-    {
+    /*{
       titulo: "Gestión y Resultados",
       descripcion: "Reportes y avances de la gestión municipal.",
       url: "#"
     }
+      */
   ]
 };

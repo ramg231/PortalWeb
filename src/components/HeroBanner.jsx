@@ -3,17 +3,17 @@ import { useState, useEffect } from "react"
 const bannerData = [
   {
     id: 1,
-    titulo: "Municipalidad Distrital de La Punta",
+    titulo: "",
     imagen: "https://www.munilapunta.gob.pe/img/slider/banner9.jpg",
   },
   {
     id: 2,
-    titulo: "Obras y Proyectos en Ejecución",
+    titulo: "",
     imagen: "https://www.munilapunta.gob.pe/img/slider/banner3.jpg",
   },
   {
     id: 3,
-    titulo: "Actividades y Eventos Municipales",
+    titulo: "",
     imagen: "https://www.munilapunta.gob.pe/img/slider/banner7.jpg",
   },
 ]
@@ -66,7 +66,7 @@ const HeroBanner = () => {
           {/* BOTÓN IZQUIERDA */}
           <button
             onClick={prevSlide}
-            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition"
+            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition cursor-pointer"
           >
             ‹
           </button>
@@ -74,7 +74,7 @@ const HeroBanner = () => {
           {/* BOTÓN DERECHA */}
           <button
             onClick={nextSlide}
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition"
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-3 rounded-full transition cursor-pointer"
           >
             ›
           </button>

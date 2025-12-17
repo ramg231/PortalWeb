@@ -11,23 +11,7 @@ const CampaniasHome = () => {
       imagenPrincipal: {
         url: "https://cdn.www.gob.pe/uploads/campaign/photo/000/018/037/317382052_465824422335030_8295411204428327721_n.jpg"
       },
-    },
-    {
-      id: 2,
-      titulo: "Busca la Gloria en La Punta",
-      fecha: "18/11/2025",
-      imagenPrincipal: {
-        url: "https://cdn.www.gob.pe/uploads/campaign/photo/000/076/370/456654357_829066069344195_8514115331449598609_n.jpg"
-      },
-    },
-    {
-      id: 3,
-      titulo: "Donación de Sangre para el Callao",
-      fecha: "14/11/2025",
-      imagenPrincipal: {
-        url: "/demo/campania3.jpg"
-      },
-    },
+    }
   ];
 
   return (

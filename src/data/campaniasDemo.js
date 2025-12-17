@@ -1,80 +1,48 @@
 export const campaniasDemo = [
   {
     id: 1,
-    titulo: "Campaña de Vacunación en La Punta",
-    fecha: "21 nov 2025",
-    categoria: "Salud",
+    titulo: "Ecotrueque Navideño",
+    fecha: "02 dic 2025",
+    categoria: "",
     resumen: `
-      Vacunación gratuita para niños y adultos mayores en el frontis municipal.
+      ¡No dejes pasar el año sin haber contribuido con el planeta! Acompáñanos en el #EcoTrueque Navideño canjeando tus residuos reciclables u orgánicos.
     `,
     autor: "MDLP",
     imagenPrincipal: {
-      url: "/demo/campania1.jpg"
+      url: "https://cdn.www.gob.pe/uploads/campaign/photo/000/018/037/317382052_465824422335030_8295411204428327721_n.jpg"
     },
     galeria: [
-      { url: "https://www.munilapunta.gob.pe/demo/campania1.jpg" },
-      { url: "https://www.munilapunta.gob.pe/demo/campania1b.jpg" },
-      { url: "https://www.munilapunta.gob.pe/demo/campania1c.jpg" },
+      { url: "" },
+     
     ],
     contenido: `
-      <p><strong>La Municipalidad Distrital de La Punta</strong> realizó una campaña integral de vacunación gratuita.</p>
+      <p style="text-align: justify;">
+<strong>¡No dejes pasar el año sin haber contribuido con el planeta!</strong> Te invitamos a participar del <strong>#EcoTrueque Navideño</strong>, una iniciativa que promueve el cuidado del medio ambiente mediante el canje de residuos reciclables u orgánicos.
+</p>
 
-      <p>Más de 300 personas entre niños, jóvenes y adultos mayores fueron atendidos por el personal médico.</p>
+<p style="text-align: justify;">
+Para participar, deberás llevar como mínimo <strong>2 kg de material reciclable</strong> o <strong>1 kg de residuos orgánicos</strong>.
+</p>
 
-      <h3>Servicios brindados</h3>
-      <ul>
-        <li>Vacunación para todas las edades</li>
-        <li>Chequeos médicos preventivos</li>
-        <li>Orientación personalizada</li>
-      </ul>
+<h3>¿Qué puedes entregar?</h3>
+<ul style="text-align: justify;">
+  <li>Botellas de plástico y vidrio</li>
+  <li>Cajas de cartón</li>
+  <li>Cuadernos y revistas</li>
+  <li>Latas</li>
+  <li>Residuos de frutas, verduras y café</li>
+  <li>Cáscaras de huevo</li>
+</ul>
 
-      <p>La campaña continuará en distintos puntos del distrito durante las próximas semanas.</p>
+<p style="text-align: justify;">
+A cambio, podrás recibir una <strong>bolsa de compost</strong> o una <strong>plantita</strong>.
+</p>
+
+<p style="text-align: justify;">
+<strong>¡Súmate a esta iniciativa y juntos sigamos construyendo un distrito más sostenible!</strong>
+</p>
+
     `
   },
-
-  {
-    id: 2,
-    titulo: "Campaña de Donación de Sangre",
-    fecha: "18 nov 2025",
-    categoria: "Salud",
-    resumen: `
-      Jornada de donación realizada en coordinación con el Ministerio de Salud.
-    `,
-    autor: "MDLP",
-    imagenPrincipal: {
-      url: "https://www.munilapunta.gob.pe/demo/campania2.jpg"
-    },
-    galeria: [
-      { url: "https://www.munilapunta.gob.pe/demo/campania2.jpg" },
-      { url: "https://www.munilapunta.gob.pe/demo/campania2b.jpg" },
-    ],
-    contenido: `
-      <p>Más de 150 vecinos participaron de la campaña de donación de sangre.</p>
-
-      <p>El personal especializado garantizó un proceso seguro y eficiente.</p>
-    `
-  },
-
-  {
-    id: 3,
-    titulo: "Campaña de Limpieza Costera",
-    fecha: "15 nov 2025",
-    categoria: "Ambiental",
-    resumen: `
-      Vecinos se unieron para la limpieza del litoral y la conservación del ecosistema marino.
-    `,
-    autor: "MDLP",
-    imagenPrincipal: {
-      url: "/demo/campania3.jpg"
-    },
-    galeria: [
-      { url: "/demo/campania3.jpg" },
-      { url: "/demo/campania3b.jpg" },
-    ],
-    contenido: `
-      <p>Jornada ambiental orientada a la recuperación y preservación del litoral.</p>
-
-      <p>Contamos con la participación de más de 200 voluntarios.</p>
-    `
-  }
+ 
 ];

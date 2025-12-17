@@ -145,7 +145,7 @@ const Adopta = () => {
         {/* BOTÓN CLICK AQUÍ */}
         <button
           id="abrirSecciones"
-          className="btn btn-primary btn-lg center-block"
+          className="btn btn-primary btn-lg center-block cursor-pointer"
           onClick={handleClickAqui}
         >
           CLICK AQUÍ
@@ -236,10 +236,11 @@ const Adopta = () => {
                           key={i}
                           src={img}
                           className="carousel-img"
-                          onClick={() => setModalImages(casosExito[indexExito])}
+                          onClick={() => setModalImages([img])}
                           alt="Caso de éxito"
                         />
                       ))}
+
                     </div>
 
                     <button className="carousel-btn left" onClick={() => prevSlide("exito")}>‹</button>
@@ -255,21 +256,6 @@ const Adopta = () => {
                       ))}
                     </ol>
                   </div>
-
-
-
-                  <ol
-                    className="custom-indicators"
-                    data-carousel-id="carouselCasosExitos"
-                  >
-                    {casosExito.map((_, idx) => (
-                      <li
-                        key={idx}
-                        className={idx === indexExito ? "active" : ""}
-                        onClick={() => setIndexExito(idx)}
-                      />
-                    ))}
-                  </ol>
                 </div>
               )}
             </div>
@@ -366,22 +352,6 @@ const Adopta = () => {
                       ))}
                     </ol>
                   </div>
-
-
-                  <ol
-                    className="custom-indicators"
-                    data-carousel-id="carouselCuidado"
-                  >
-                    {cuidado.map((_, idx) => (
-                      <li
-                        key={idx}
-                        className={
-                          idx === indexCuidado ? "active" : ""
-                        }
-                        onClick={() => setIndexCuidado(idx)}
-                      />
-                    ))}
-                  </ol>
                 </div>
               )}
             </div>

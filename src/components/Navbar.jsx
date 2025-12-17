@@ -59,6 +59,14 @@ const menuItems = [
     label: 'DIFUSION INSTITUCIONAL',
     link: null,
     items: [
+       {
+        label: 'TRIBUTOS',
+        link: '/tributos'
+      },
+      {
+        label: 'LICENCIAS DE FUNCIONAMIENTO',
+        link: 'licencias-funcionamiento'
+      },
       {
         label: 'GUIA TURÍSTICA',
         link: 'https://www.gob.pe/institucion/munilapunta/informes-publicaciones/7496995'

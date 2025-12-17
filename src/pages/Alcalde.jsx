@@ -40,17 +40,17 @@ const Alcalde = () => {
           <p className="text-gray-500 text-sm mt-1">
             Periodo de gestión: {alcaldeData.periodo}
           </p>
-
+          {/*
           <blockquote className="mt-5 border-l-4 border-[#003566] pl-4 text-[#003566] italic text-lg font-medium">
             “{alcaldeData.frase}”
-          </blockquote>
+          </blockquote> */}
         </div>
       </div>
 
       {/* Biografía */}
       <section className="mb-14">
         <h3 className="text-2xl font-bold text-[#003566] mb-4">
-          Biografía y Trayectoria
+          Palabras del Alcalde
         </h3>
 
         <div className="text-gray-700 leading-relaxed space-y-4 text-justify">
@@ -60,7 +60,7 @@ const Alcalde = () => {
         </div>
       </section>
 
-      {/* Funciones */}
+      {/* Funciones 
       <section className="mb-14">
         <h3 className="text-2xl font-bold text-[#003566] mb-4">
           Funciones del Alcalde
@@ -71,7 +71,7 @@ const Alcalde = () => {
             <li key={i}>{f}</li>
           ))}
         </ul>
-      </section>
+      </section> */}
 
       {/* Enlaces */}
       <section>

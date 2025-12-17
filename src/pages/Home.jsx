@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PopoverModal from "@/components/PopoverModal";
+import  PopoverController  from "@/components/PopoverController";
 import HeroBanner from '@/components/HeroBanner'
 import ServiciosDestacados from '@/components/ServiciosDestacados'
 import AlcaldeSection from '@/components/AlcaldeSection'
@@ -66,12 +66,7 @@ const closeModal = () => {
   return (
     <>
       {/* POPUP */}
-      {showModal && (
-        <PopoverModal
-          imagenes={popoverData.imagenes}  // ✔ desde data
-          onClose={closeModal}
-        />
-      )}
+     
       <HeroBanner />
       <ServiciosDestacados />
       <AlcaldeSection />
@@ -79,6 +74,7 @@ const closeModal = () => {
       <CampaniasHome />
 
       <SocialBar />
+        <PopoverController />
     </>
   )
 }
