@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import CardNoticia from "@/components/CardNoticia";
-import { noticiasDemo } from "@/data/noticiasDemo"; // ✔ ahora sí, usando datos globales
+import { getUltimasNoticias } from "@/api/strapi";
 
 const NoticiasHome = () => {
+  const [noticias, setNoticias] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 🔥 Tomamos solo las primeras 3 noticias
-  const ultimasNoticias = noticiasDemo.slice(0, 3);
+  useEffect(() => {
+    getUltimasNoticias()
+      .then((res) => setNoticias(res.data.data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return null; // o skeleton si quieres
 
   return (
     <section className="py-14 bg-gray-50">
@@ -27,15 +35,15 @@ const NoticiasHome = () => {
 
         {/* Cards */}
         <div className="grid md:grid-cols-3 gap-6">
-          {ultimasNoticias.map((n) => (
-            <Link to={`/noticias/${n.id}`} key={n.id} className="block">
+          {noticias.map((n) => (
+            <Link to={`/noticias/${n.slug}`} key={n.id} className="block">
               <CardNoticia
                 titulo={n.titulo}
                 resumen={n.resumen}
-                fecha={n.fecha}
+                fecha={new Date(n.fecha).toLocaleDateString("es-PE")}
                 categoria={n.categoria}
                 autor={n.autor}
-                imagen={n.imagenPrincipal.url}   // ✔ imagen principal
+                imagen={n.imagenPrincipal?.url}
               />
             </Link>
           ))}

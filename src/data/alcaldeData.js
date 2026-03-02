@@ -8,9 +8,14 @@ export const alcaldeData = {
    imagenPrincipal: alcaldeImg, // ✔ esto sí funciona
 
   biografia: [
-    "El alcalde cuenta con una trayectoria destacada en la gestión pública y privada, promoviendo siempre el desarrollo sostenible del distrito.",
-    "Es profesional en áreas vinculadas a la administración municipal, con experiencia en seguridad ciudadana, gestión ambiental y participación vecinal.",
-    "Su compromiso es modernizar los servicios municipales y fortalecer el desarrollo social del distrito."
+    "Estimados vecinos de La Punta:",
+    `Desde el inicio de nuestra gestión, hemos trabajado con responsabilidad y compromiso para mantener a La Punta como un distrito ordenado, seguro y con una alta calidad de vida. Gracias al esfuerzo conjunto, hoy contamos con servicios municipales que funcionan de manera continua y eficiente, beneficiando a toda nuestra comunidad.
+
+El pago oportuno de los tributos municipales, como los arbitrios y el impuesto predial, ha permitido fortalecer la limpieza pública, la seguridad ciudadana y el mantenimiento de nuestros espacios públicos, además de impulsar mejoras que hoy son una realidad.
+
+Seguiremos administrando estos recursos con transparencia y eficiencia, priorizando siempre el bienestar de nuestros vecinos y el desarrollo sostenible del distrito.
+
+Sigamos trabajando juntos por el distrito que merecemos.`
   ],
 
   funciones: [

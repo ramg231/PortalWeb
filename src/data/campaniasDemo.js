@@ -12,7 +12,7 @@ export const campaniasDemo = [
       url: "https://cdn.www.gob.pe/uploads/campaign/photo/000/018/037/317382052_465824422335030_8295411204428327721_n.jpg"
     },
     galeria: [
-      { url: "" },
+      { url: "https://cdn.www.gob.pe/uploads/campaign/photo/000/018/037/317382052_465824422335030_8295411204428327721_n.jpg" },
      
     ],
     contenido: `

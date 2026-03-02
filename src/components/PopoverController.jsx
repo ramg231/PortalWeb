@@ -1,31 +1,42 @@
 import { useEffect, useState } from "react";
 import PopoverModal from "./PopoverModal";
-import { popoverData } from "@/data/popoverData";
+import { getActivePopover } from "@/api/strapi";
 
 const PopoverController = () => {
   const [visible, setVisible] = useState(false);
+  const [popover, setPopover] = useState(null);
 
   useEffect(() => {
-    // 🔴 si está apagado, no hace nada
-    if (!popoverData.activo) return;
+    getActivePopover()
+      .then((res) => {
+        const items = res?.data?.data;
 
-    const key = "popover-last-shown";
-    const lastShown = localStorage.getItem(key);
-    const now = Date.now();
+        if (!Array.isArray(items) || items.length === 0) return;
 
-    const delayMs = popoverData.delayMinutos * 60 * 1000;
+        const pop = items[0];
 
-    if (!lastShown || now - lastShown > delayMs) {
-      setVisible(true);
-      localStorage.setItem(key, now);
-    }
+        if (!pop.activo) return;
+
+        const key = "popover-last-shown";
+        const lastShown = localStorage.getItem(key);
+        const now = Date.now();
+
+        const delayMs = (pop.delayMinutos || 0) * 60 * 1000;
+
+        if (!lastShown || now - lastShown > delayMs) {
+          setPopover(pop);
+          setVisible(true);
+          localStorage.setItem(key, now);
+        }
+      })
+      .catch((err) => console.error("Popover error:", err));
   }, []);
 
-  if (!visible) return null;
+  if (!visible || !popover) return null;
 
   return (
     <PopoverModal
-      slides={popoverData.slides}
+      slides={popover.slides}
       initialIndex={0}
       onClose={() => setVisible(false)}
     />

@@ -14,7 +14,7 @@ export const noticiasDemo = [
       url: "https://cdn.www.gob.pe/uploads/document/file/9112146/1304927-servir-la-gestion-del-rendimiento-es-una-oportunidad-para-fortalecer-capacidades-y-mejorar-los-servicios-publicos.jpeg"
     },
 
-    // 🔵 GALERÍA (IMÁGENES DEL SLIDER)
+    // 🔵 GALERÍA (IMÁGENES DEL SLIDER) 
     galeria: [
       {
         url: "https://cdn.www.gob.pe/uploads/document/file/9112146/1304927-servir-la-gestion-del-rendimiento-es-una-oportunidad-para-fortalecer-capacidades-y-mejorar-los-servicios-publicos.jpeg"

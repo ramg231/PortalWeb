@@ -7,25 +7,30 @@ export const centroMedicoData = {
     "Asimismo, cuenta con 03 especialidades no médicas: Psicología, Nutrición y Odontología. Nuestros consultorios también cuentan con una ambulancia categoría II implementada y con un reconocido equipo profesional.",
     "Además, se mantienen acuerdos de cooperación mutua con distintas instituciones para campañas periódicas de promoción de la salud preventiva y diagnóstica."
   ],
-
+ 
   imagenes: [
-    "https://www.munilapunta.gob.pe/img/programas/centro_medico/centro1.jpg",
-    "https://www.munilapunta.gob.pe/img/programas/centro_medico/centro2.jpg",
-    "https://www.munilapunta.gob.pe/img/programas/centro_medico/centro3.jpg"
+    "/uploads/centro3_c924604f3c.jpg",
+      "/uploads/centro2_baca82e008.jpg"
   ],
 
   serviciosMedicos: [
-    "Cardiología",
-    "Dermatología",
+    "Terapia Fisica",
+    "Odontología",
     "Geriatría",
-    "Traumatología",
-    "Medicina Física y Rehabilitación",
-    "Medicina General",
-    "Pediatría",
+      "Medicina Física",
+    "Endocrinología",
+    "Cardiología",
+    "Traumatología",  
+    "Otorrino",
+    "Urología",
+    "Nutrición",
+    "Urologia",
+    "Nutrición",
+    "Dermatología",
     "Ginecología",
-    "Oftalmología",
-    "Otorrinolaringología",
-    "Emergencia 24 horas"
+    "Psiquiatría",
+    "Psicología",
+    "Gimnasia Mental"
   ],
  
 

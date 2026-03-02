@@ -4,17 +4,17 @@ const bannerData = [
   {
     id: 1,
     titulo: "",
-    imagen: "https://www.munilapunta.gob.pe/img/slider/banner9.jpg",
+    imagen: "https://i.imgur.com/OKS5hTI.jpeg",
   },
   {
     id: 2,
     titulo: "",
-    imagen: "https://www.munilapunta.gob.pe/img/slider/banner3.jpg",
+    imagen: "https://i.imgur.com/SjCXdeD.jpeg",
   },
   {
     id: 3,
     titulo: "",
-    imagen: "https://www.munilapunta.gob.pe/img/slider/banner7.jpg",
+    imagen: "https://i.imgur.com/iRCT3RY.jpeg",
   },
 ]
 

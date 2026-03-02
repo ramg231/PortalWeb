@@ -1,15 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import "../adopta.css";
 
-import { canesAdopcion } from "@/data/canesAdopcion";
-import { casosExito } from "@/data/casosExito";
-import { perritosPerdidos } from "@/data/perritosPerdidos";
-import { cuidado } from "@/data/cuidado";
+import {
+  getCanesAdopcion,
+  getCanesExitos,
+  getCanesPerdidos,
+  getCanesRescatados,
+} from "@/api/strapi";
+
+const ORDEN_TAMANO = { pequeno: 1, mediano: 2, grande: 3 };
+const CAMPOS_CARD_BACK = [
+  { key: "edad", label: "Edad" },
+  { key: "caracteristicas", label: "Características" },
+  { key: "raza", label: "Raza" },
+  { key: "tamano", label: "Tamaño" },
+  { key: "sexo", label: "Sexo" },
+  { key: "contacto", label: "Contacto" },
+];
+const ITEMS_POR_SLIDE = 3;
+
+const normalizarTamano = (tamano = "") =>
+  tamano
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const getCardBackColorClass = (tamano = "") => {
+  const clases = {
+    pequeno: "bg-pequeno",
+    mediano: "bg-mediano",
+    grande: "bg-grande",
+  };
+
+  return clases[normalizarTamano(tamano)] || "bg-slate-500";
+};
+
+const formatearDato = (valor) => {
+  if (valor === null || valor === undefined) return "No disponible";
+  const texto = String(valor).trim();
+  return texto || "No disponible";
+};
 
 const Adopta = () => {
   const [showSections, setShowSections] = useState(false);
   const [modalImages, setModalImages] = useState(null);
-
+  const [canesAdopcion, setCanesAdopcion] = useState([]);
+  const [loadingCanes, setLoadingCanes] = useState(true);
+  const [casosExito, setCasosExito] = useState([]);
+  const [loadingExito, setLoadingExito] = useState(true);
+  const [canesPerdidos, setCanesPerdidos] = useState([]);
+  const [loadingPerdidos, setLoadingPerdidos] = useState(true);
+  const [canesRescatados, setCanesRescatados] = useState([]);
+  const [loadingRescatados, setLoadingRescatados] = useState(true);
   const [openPanel, setOpenPanel] = useState({
     canes: true,
     exito: false,
@@ -21,6 +65,9 @@ const Adopta = () => {
   const [indexExito, setIndexExito] = useState(0);
   const [indexPerdidos, setIndexPerdidos] = useState(0);
   const [indexCuidado, setIndexCuidado] = useState(0);
+  const totalSlidesRescatados = Math.ceil(
+    canesRescatados.length / ITEMS_POR_SLIDE
+  );
 
   const [normaSeleccionada, setNormaSeleccionada] = useState("ley30407");
 
@@ -48,12 +95,14 @@ const Adopta = () => {
     if (type === "exito") {
       setIndexExito((prev) => (prev - 1 + casosExito.length) % casosExito.length);
     } else if (type === "perdidos") {
+      if (!canesPerdidos.length) return;
       setIndexPerdidos(
-        (prev) => (prev - 1 + perritosPerdidos.length) % perritosPerdidos.length
+        (prev) => (prev - 1 + canesPerdidos.length) % canesPerdidos.length
       );
     } else if (type === "cuidado") {
+      if (!totalSlidesRescatados) return;
       setIndexCuidado(
-        (prev) => (prev - 1 + cuidado.length) % cuidado.length
+        (prev) => (prev - 1 + totalSlidesRescatados) % totalSlidesRescatados
       );
     }
   };
@@ -62,12 +111,14 @@ const Adopta = () => {
     if (type === "exito") {
       setIndexExito((prev) => (prev + 1) % casosExito.length);
     } else if (type === "perdidos") {
+      if (!canesPerdidos.length) return;
       setIndexPerdidos(
-        (prev) => (prev + 1) % perritosPerdidos.length
+        (prev) => (prev + 1) % canesPerdidos.length
       );
     } else if (type === "cuidado") {
+      if (!totalSlidesRescatados) return;
       setIndexCuidado(
-        (prev) => (prev + 1) % cuidado.length
+        (prev) => (prev + 1) % totalSlidesRescatados
       );
     }
   };
@@ -102,6 +153,140 @@ const Adopta = () => {
     }
     return null;
   };
+  useEffect(() => {
+    getCanesAdopcion()
+      .then((res) => {
+        // Strapi v4
+        const data = res.data.data
+          .map((item) => ({
+            id: item.id,
+            documentId: item.documentId,
+            nombre: item.nombre,
+            edad: item.edad,
+            tamano: item.tamano,
+            sexo: item.sexo,
+            caracteristicas: item.caracteristicas,
+            raza: item.raza,
+            contacto: item.contacto,
+            url: item.url,
+            images: item.images || [],
+            principal: item.principal || null,
+          }))
+          .sort((a, b) => {
+            const ordenA = ORDEN_TAMANO[normalizarTamano(a.tamano)] ?? 99;
+            const ordenB = ORDEN_TAMANO[normalizarTamano(b.tamano)] ?? 99;
+            return ordenA - ordenB;
+          });
+
+        setCanesAdopcion(data);
+      })
+      .catch((err) => {
+        console.error("Error cargando canes en adopción", err);
+      })
+      .finally(() => {
+        setLoadingCanes(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCanesExitos()
+      .then((res) => {
+        const data = res.data.data.map((item) => ({
+          id: item.id,
+          orden: item.orden,
+          imagen: item.imagen?.[0]?.url || null,
+        }));
+
+        setCasosExito(data);
+      })
+      .catch((err) => {
+        console.error("Error cargando casos de éxito", err);
+      })
+      .finally(() => {
+        setLoadingExito(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    getCanesPerdidos()
+      .then((res) => {
+        const data = res.data.data
+          .map((item) => {
+            const media = item.imgper;
+            const images = Array.isArray(media)
+              ? media.map((img) => img?.url).filter(Boolean)
+              : media?.url
+                ? [media.url]
+                : [];
+
+            return {
+              id: item.id,
+              images,
+            };
+          })
+          .filter((item) => item.images.length > 0);
+
+        setCanesPerdidos(data);
+      })
+      .catch((err) => {
+        console.error("Error cargando perritos perdidos", err);
+      })
+      .finally(() => {
+        setLoadingPerdidos(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (indexPerdidos >= canesPerdidos.length) {
+      setIndexPerdidos(0);
+    }
+  }, [canesPerdidos, indexPerdidos]);
+
+  useEffect(() => {
+    getCanesRescatados()
+      .then((res) => {
+        const data = res.data.data
+          .map((item) => ({
+            id: item.id,
+            images: item.rescatados?.url
+              ? [item.rescatados.url]
+              : [],
+          }))
+          .filter((item) => item.images.length > 0);
+
+        setCanesRescatados(data);
+      })
+      .catch((err) => {
+        console.error("Error cargando canes rescatados", err);
+      })
+      .finally(() => {
+        setLoadingRescatados(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (indexCuidado >= totalSlidesRescatados) {
+      setIndexCuidado(0);
+    }
+  }, [totalSlidesRescatados, indexCuidado]);
+
+  const totalSlidesExito = Math.ceil(
+    casosExito.length / ITEMS_POR_SLIDE
+  );
+
+  const getExitoBySlide = (index) => {
+    const start = index * ITEMS_POR_SLIDE;
+    return casosExito.slice(start, start + ITEMS_POR_SLIDE);
+  };
+
+  const getRescatadosBySlide = (index) => {
+    const start = index * ITEMS_POR_SLIDE;
+    return canesRescatados.slice(start, start + ITEMS_POR_SLIDE);
+  };
+
+
+
+
 
   return (
     <div id="adopta-page">
@@ -119,7 +304,7 @@ const Adopta = () => {
         {/* HEADER CON PERRO + TITULO */}
         <div className="adopta-header">
           <img
-            src="https://www.munilapunta.gob.pe/img/mascotas/perrosf.png"
+            src="https://web.munilapunta.gob.pe/uploads/perrosf_fb9537e32e.png"
             alt="Perro en adopción"
             className="dog-image"
           />
@@ -168,25 +353,45 @@ const Adopta = () => {
                   1. CANES EN ADOPCIÓN
                 </h4>
               </div>
+
               {openPanel.canes && (
                 <div className="panel-body">
                   <div className="canes-grid">
-                    {canesAdopcion.map((can, i) => (
-                      <div key={i} className="can-card">
+                    {canesAdopcion.map((can) => (
+                      <div key={can.id} className="can-card">
                         <div className="card-inner">
+
+                          {/* FRENTE */}
                           <div className="card-front">
-                            <img src={can.images[0]} alt={can.nombre} />
+                            <img
+                              src={can.principal?.url || can.images?.[0]?.url}
+                              alt={can.nombre}
+                            />
                           </div>
+
+                          {/* REVERSO */}
                           <div
-                            className="card-back"
+                            className={`card-back ${getCardBackColorClass(can.tamano)}`}
                             style={{ cursor: "pointer" }}
-                            onClick={() => setModalImages(can.images)}
+                            onClick={() =>
+                              setModalImages(
+                                can.images?.map(img => img.url) || []
+                              )
+                            }
                           >
-                            <p>Edad: {can.edad}</p>
-                            <p>Tamaño: {can.tamano}</p>
-                            <p>Sexo: {can.sexo}</p>
+                            <div className="card-back-content">
+                              {CAMPOS_CARD_BACK.map((campo) => (
+                                <div key={campo.key} className="card-back-row">
+                                  <span className="card-back-label">{campo.label}</span>
+                                  <span className="card-back-value">
+                                    {formatearDato(can[campo.key])}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
+
                         <div className="can-name">
                           <a
                             href={can.url}
@@ -203,6 +408,7 @@ const Adopta = () => {
               )}
             </div>
 
+
             {/* 2. CASOS DE ÉXITO */}
             <div
               id="casosExito"
@@ -217,13 +423,17 @@ const Adopta = () => {
                   2. CASOS DE ÉXITO
                 </h4>
               </div>
+
               {openPanel.exito && (
                 <div className="panel-body">
                   <p>
-                    Cada una de estas adopciones es una muestra de que cuando hay compromiso, amor y responsabilidad, todo cambia para bien.
+                    Cada una de estas adopciones es una muestra de que cuando hay compromiso,
+                    amor y responsabilidad, todo cambia para bien.
                   </p>
                   <p>
-                    Nos alegra saber que siguen creciendo sanos, felices y acompañados… ¡por eso seguimos adelante, buscando más familias que se animen a cambiar una vida!
+                    Nos alegra saber que siguen creciendo sanos, felices y acompañados…
+                    ¡por eso seguimos adelante, buscando más familias que se animen a cambiar
+                    una vida!
                   </p>
                   <p>
                     Ellos lo lograron. ¿Y tú, te animas a escribir el próximo final feliz?
@@ -231,23 +441,46 @@ const Adopta = () => {
 
                   <div className="carousel-container">
                     <div className="carousel-slide">
-                      {casosExito[indexExito].map((img, i) => (
+                      {getExitoBySlide(indexExito).map((item) => (
                         <img
-                          key={i}
-                          src={img}
+                          key={item.id}
+                          src={item.imagen}
                           className="carousel-img"
-                          onClick={() => setModalImages([img])}
                           alt="Caso de éxito"
+                          onClick={() => setModalImages([item.imagen])}
+
                         />
                       ))}
-
                     </div>
 
-                    <button className="carousel-btn left" onClick={() => prevSlide("exito")}>‹</button>
-                    <button className="carousel-btn right" onClick={() => nextSlide("exito")}>›</button>
+                    <button
+                      className="carousel-btn left"
+                      onClick={() =>
+                        setIndexExito(
+                          indexExito === 0
+                            ? totalSlidesExito - 1
+                            : indexExito - 1
+                        )
+                      }
+                    >
+                      ‹
+                    </button>
+
+                    <button
+                      className="carousel-btn right"
+                      onClick={() =>
+                        setIndexExito(
+                          indexExito === totalSlidesExito - 1
+                            ? 0
+                            : indexExito + 1
+                        )
+                      }
+                    >
+                      ›
+                    </button>
 
                     <ol className="custom-indicators">
-                      {casosExito.map((_, idx) => (
+                      {Array.from({ length: totalSlidesExito }).map((_, idx) => (
                         <li
                           key={idx}
                           className={idx === indexExito ? "active" : ""}
@@ -260,101 +493,111 @@ const Adopta = () => {
               )}
             </div>
 
+
             {/* 3. PERRITOS PERDIDOS */}
-            <div
-              id="perdidos"
-              className="panel panel-default section-title"
-            >
+            {!loadingPerdidos && canesPerdidos.length > 0 && (
               <div
-                className="panel-heading"
-                onClick={() => togglePanel("perdidos")}
-                style={{ cursor: "pointer" }}
+                id="perdidos"
+                className="panel panel-default section-title"
               >
-                <h4 className="panel-title">
-                  3. PERRITOS PERDIDOS
-                </h4>
-              </div>
-              {openPanel.perdidos && (
-                <div className="carousel-container">
-                  <div className="carousel-slide">
-                    <img
-                      src={perritosPerdidos[indexPerdidos][0]}
-                      className="carousel-img"
-                      onClick={() => setModalImages(perritosPerdidos[indexPerdidos])}
-                      alt="Perrito perdido"
-                    />
-                  </div>
-
-                  <button className="carousel-btn left" onClick={() => prevSlide("perdidos")}>‹</button>
-                  <button className="carousel-btn right" onClick={() => nextSlide("perdidos")}>›</button>
-
-                  <ol className="custom-indicators">
-                    {perritosPerdidos.map((_, idx) => (
-                      <li
-                        key={idx}
-                        className={idx === indexPerdidos ? "active" : ""}
-                        onClick={() => setIndexPerdidos(idx)}
-                      />
-                    ))}
-                  </ol>
+                <div
+                  className="panel-heading"
+                  onClick={() => togglePanel("perdidos")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <h4 className="panel-title">
+                    3. PERRITOS PERDIDOS
+                  </h4>
                 </div>
-
-              )}
-            </div>
-
-            {/* 4. CUIDADO Y ACOMPAÑAMIENTO */}
-            <div
-              id="cuidado"
-              className="panel panel-default section-title"
-            >
-              <div
-                className="panel-heading"
-                onClick={() => togglePanel("cuidado")}
-                style={{ cursor: "pointer" }}
-              >
-                <h4 className="panel-title">
-                  4. CUIDADO Y ACOMPAÑAMIENTO DE LOS RESCATADOS
-                </h4>
-              </div>
-              {openPanel.cuidado && (
-                <div className="panel-body">
-                  <p>
-                    En La Punta, nuestros perritos rescatados no solo reciben atención médica, paseos y cariño mientras esperan… también reciben esperanza.
-                  </p>
-                  <p>
-                    Aunque están protegidos y bien cuidados, nada reemplaza el calor de un hogar verdadero. Por eso, buscamos familias responsables que les den el amor que merecen.
-                  </p>
-                  <p>
-                    Nos comprometemos con ellos incluso después de la adopción: los entregamos vacunados, esterilizados y solo a adoptantes que pasen una evaluación, porque su bienestar es nuestra prioridad.
-                  </p>
-                  <p>Adoptar es cambiar una vida.</p>
-
+                {openPanel.perdidos && (
                   <div className="carousel-container">
                     <div className="carousel-slide">
                       <img
-                        src={cuidado[indexCuidado][0]}
+                        src={canesPerdidos[indexPerdidos]?.images?.[0]}
                         className="carousel-img"
-                        onClick={() => setModalImages(cuidado[indexCuidado])}
-                        alt="Cuidado"
+                        onClick={() =>
+                          setModalImages(canesPerdidos[indexPerdidos]?.images || [])
+                        }
+                        alt="Perrito perdido"
                       />
                     </div>
 
-                    <button className="carousel-btn left" onClick={() => prevSlide("cuidado")}>‹</button>
-                    <button className="carousel-btn right" onClick={() => nextSlide("cuidado")}>›</button>
+                    <button className="carousel-btn left" onClick={() => prevSlide("perdidos")}>‹</button>
+                    <button className="carousel-btn right" onClick={() => nextSlide("perdidos")}>›</button>
 
                     <ol className="custom-indicators">
-                      {cuidado.map((_, idx) => (
+                      {canesPerdidos.map((_, idx) => (
                         <li
                           key={idx}
-                          className={idx === indexCuidado ? "active" : ""}
-                          onClick={() => setIndexCuidado(idx)}
+                          className={idx === indexPerdidos ? "active" : ""}
+                          onClick={() => setIndexPerdidos(idx)}
                         />
                       ))}
                     </ol>
                   </div>
+
+                )}
+              </div>
+            )}
+
+            {/* 4. CUIDADO Y ACOMPAÑAMIENTO */}
+            {!loadingRescatados && canesRescatados.length > 0 && (
+              <div
+                id="cuidado"
+                className="panel panel-default section-title"
+              >
+                <div
+                  className="panel-heading"
+                  onClick={() => togglePanel("cuidado")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <h4 className="panel-title">
+                    4. CUIDADO Y ACOMPAÑAMIENTO DE LOS RESCATADOS
+                  </h4>
                 </div>
-              )}
-            </div>
+                {openPanel.cuidado && (
+                  <div className="panel-body">
+                    <p>
+                      En La Punta, nuestros perritos rescatados no solo reciben atención médica, paseos y cariño mientras esperan… también reciben esperanza.
+                    </p>
+                    <p>
+                      Aunque están protegidos y bien cuidados, nada reemplaza el calor de un hogar verdadero. Por eso, buscamos familias responsables que les den el amor que merecen.
+                    </p>
+                    <p>
+                      Nos comprometemos con ellos incluso después de la adopción: los entregamos vacunados, esterilizados y solo a adoptantes que pasen una evaluación, porque su bienestar es nuestra prioridad.
+                    </p>
+                    <p>Adoptar es cambiar una vida.</p>
+
+                    <div className="carousel-container">
+                      <div className="carousel-slide">
+                        {getRescatadosBySlide(indexCuidado).map((item) => (
+                          <img
+                            key={item.id}
+                            src={item.images?.[0]}
+                            className="carousel-img"
+                            onClick={() => setModalImages(item.images || [])}
+                            alt="Cuidado"
+                          />
+                        ))}
+                      </div>
+
+                      <button className="carousel-btn left" onClick={() => prevSlide("cuidado")}>‹</button>
+                      <button className="carousel-btn right" onClick={() => nextSlide("cuidado")}>›</button>
+
+                      <ol className="custom-indicators">
+                        {Array.from({ length: totalSlidesRescatados }).map((_, idx) => (
+                          <li
+                            key={idx}
+                            className={idx === indexCuidado ? "active" : ""}
+                            onClick={() => setIndexCuidado(idx)}
+                          />
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* 5. NORMAS, SANCIONES Y VIGILANCIA */}
             <div
@@ -392,10 +635,10 @@ const Adopta = () => {
                       <b>NORMAS</b>
                       <br />
                       <br />
-                      <ul className="a" style={{ marginLeft: "35px" }}>
+                      <ul className="a" style={{ marginLeft: "35px", listStyleType: "circle" }}>
                         <li>
                           <button
-                            className="link-button"
+                            className="link-button cursor-pointer"
                             onClick={() => setNormaSeleccionada("ley30407")}
                           >
                             LEY Nº 30407 - LEY DE PROTECCIÓN Y BIENESTAR
@@ -404,7 +647,7 @@ const Adopta = () => {
                         </li>
                         <li>
                           <button
-                            className="link-button"
+                            className="link-button cursor-pointer"
                             onClick={() => setNormaSeleccionada("ordenanza008")}
                           >
                             ORDENANZA MUNICIPAL Nº 008-2021-MDLP/AL
@@ -412,7 +655,7 @@ const Adopta = () => {
                         </li>
                         <li>
                           <button
-                            className="link-button"
+                            className="link-button cursor-pointer"
                             onClick={() => setNormaSeleccionada("ley27596")}
                           >
                             LEY Nº 27596 - LEY QUE REGULA EL RÉGIMEN

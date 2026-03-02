@@ -43,6 +43,7 @@ const menuItems = [
       },
       { label: 'CENTRO MEDICO MUNICIPAL', link: '/centro-medico' },
       { label: 'ADOPTA UN AMIGO', link: '/adopta-amigo' },
+      { label: 'MATRIMONIO CIVIL', link: 'https://www.gob.pe/institucion/munilapunta/informes-publicaciones/7618174' },
     ],
   },
   {
@@ -79,6 +80,10 @@ const menuItems = [
         label: 'PLAN TSUNAMI',
         link: 'https://drive.google.com/file/d/1i3Gfb7IbiMyFOwnO5TNxW3wxA4G4pZMW/view?usp=sharing'
       },
+         {
+        label:'CODISEC',
+        link:'https://www.gob.pe/institucion/munilapunta/colecciones/31111-codisec-mdlp'
+      },
       {
         label: 'SISTEMA DE SEGURIDAD Y SALUD EN EL TRABAJO',
         link: 'https://www.gob.pe/institucion/munilapunta/colecciones/62322-sistema-de-seguridad-y-salud-en-el-trabajo-mdlp'
@@ -89,8 +94,12 @@ const menuItems = [
       },
       {
         label: 'TRANSITO A SERVIR',
-        link: 'https://s3.amazonaws.com/documentos.api.gob.pe/ni1tynd2359k83u05d2pkkeoypq2?response-content-disposition=inline%3B%20filename%3D%22estructura_organica_mdlp.pdf%22%3B%20filename%2A%3DUTF-8%27%27estructura_organica_mdlp.pdf&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJREKOSPKMJFYJDAQ%2F20251206%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251206T202712Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=7a2e1c468d0140ed0cbd932115be1d030f45ab187e285bac371982634825d048',
-      },
+        link: '/servir'
+       },
+       {
+        label: 'DIRECTIVAS',
+        link: '/directivas'
+       },
      
       {
         label: 'TRANSFERENCIA DE GESTION',
@@ -98,7 +107,7 @@ const menuItems = [
       },
              {
         label: 'JUNTAS VECINALES COMUNALES',
-        link: 'https://www.gob.pe/institucion/munilapunta/sedes',
+        link: '/juntas-vecinales',
       },
        {
         label: 'SUBASTA PÚBLICA',
@@ -110,7 +119,7 @@ const menuItems = [
       },
        {
         label: 'COMITÉ DE SEGURIDAD Y SALUD EN EL TRABAJO',
-        link: 'https://www.gob.pe/institucion/munilapunta/sedes',
+        link: 'https://www.gob.pe/institucion/munilapunta/colecciones/45862-elecciones-de-los-representantes-de-trabajadores-ante-el-comite-de-seguridad-y-salud-en-el-trabajo-mdlp-2024-2026',
       },
       {
         label: 'COMITÉ DE PLANIFICACION DE LA CAPACITACIÓN CPC',

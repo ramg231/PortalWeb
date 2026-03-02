@@ -3,30 +3,27 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PopoverModal = ({ slides = [], initialIndex = 0, onClose }) => {
 
-  // 🔥 solo slides activos
-  const slidesActivos = slides.filter(s => s.activo !== false);
-
   const [index, setIndex] = useState(initialIndex);
 
   useEffect(() => {
     setIndex(initialIndex);
   }, [initialIndex]);
 
-  if (!slidesActivos.length) return null;
+  if (!slides.length) return null;
 
   const siguiente = () =>
-    setIndex((prev) => (prev + 1) % slidesActivos.length);
+    setIndex((prev) => (prev + 1) % slides.length);
 
   const anterior = () =>
     setIndex((prev) =>
-      prev === 0 ? slidesActivos.length - 1 : prev - 1
+      prev === 0 ? slides.length - 1 : prev - 1
     );
 
-  const slide = slidesActivos[index];
+  const slide = slides[index];
 
   const Imagen = (
     <img
-      src={slide.imagen}
+      src={slide.imagen?.url}
       className="w-full max-h-[80vh] object-contain bg-black cursor-pointer"
       alt=""
     />
@@ -38,7 +35,6 @@ const PopoverModal = ({ slides = [], initialIndex = 0, onClose }) => {
 
         <div className="relative">
 
-          {/* 🟦 Imagen con o sin link */}
           {slide.link ? (
             <a
               href={slide.link}
@@ -51,18 +47,18 @@ const PopoverModal = ({ slides = [], initialIndex = 0, onClose }) => {
             Imagen
           )}
 
-          {slidesActivos.length > 1 && (
+          {slides.length > 1 && (
             <>
               <button
                 onClick={anterior}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
               >
                 <ChevronLeft size={20} />
               </button>
 
               <button
                 onClick={siguiente}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
               >
                 <ChevronRight size={20} />
               </button>
@@ -73,7 +69,7 @@ const PopoverModal = ({ slides = [], initialIndex = 0, onClose }) => {
         <div className="flex justify-end p-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#003566] text-white hover:bg-[#001d3d]"
+            className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#003566] text-white hover:bg-[#001d3d] cursor-pointer"
           >
             Cerrar
           </button>

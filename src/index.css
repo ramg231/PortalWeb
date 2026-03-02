@@ -2,3 +2,9 @@
 body {
   @apply font-sans bg-white;
 }
+
+@theme {
+  --color-pequeno: #A8D08D;
+  --color-mediano: #F7CAAC; 
+  --color-grande: #FFF2CC;
+}

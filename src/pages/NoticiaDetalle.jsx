@@ -1,35 +1,44 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ModalGaleria from "@/components/ModalGaleria";
-
-
-import { noticiasDemo } from "@/data/noticiasDemo";
+import { getNoticiaBySlug } from "@/api/strapi";   // 🔴 cambio aquí
+import { renderRichText } from "@/utils/renderRichText";
 
 const NoticiaDetalle = () => {
-  const { id } = useParams();
+  const { slug } = useParams();                   // 🔴 cambio aquí
 
-  const noticia = noticiasDemo.find((n) => n.id === Number(id));
-
+  const [noticia, setNoticia] = useState(null);
   const [index, setIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    getNoticiaBySlug(slug)
+      .then((res) => {
+        setNoticia(res.data.data[0]);             // 🔴 cambio aquí
+      })
+      .finally(() => setLoading(false));
+  }, [slug]);                                     // 🔴 cambio aquí
+
+  if (loading) return <p>Cargando...</p>;
   if (!noticia) return <p>Noticia no encontrada</p>;
 
+  const galeria = noticia.galeria || [];
+
   const siguiente = () =>
-    setIndex((prev) => (prev + 1) % noticia.galeria.length);
+    setIndex((prev) => (prev + 1) % galeria.length);
 
   const anterior = () =>
     setIndex((prev) =>
-      prev === 0 ? noticia.galeria.length - 1 : prev - 1
+      prev === 0 ? galeria.length - 1 : prev - 1
     );
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-14">
 
-      {/* Breadcrumbs */}
       <Breadcrumbs
         items={[
           { label: "Inicio", href: "/" },
@@ -38,66 +47,67 @@ const NoticiaDetalle = () => {
         ]}
       />
 
-      {/* Categoría */}
       <span className="inline-block px-3 py-1 bg-[#003566] text-white rounded-full text-xs mt-4">
         {noticia.categoria}
       </span>
 
-      {/* Título */}
       <h1 className="text-4xl font-extrabold text-[#003566] mt-4 mb-2">
         {noticia.titulo}
       </h1>
 
-      {/* Fecha - Autor */}
       <p className="text-gray-600 mb-8 flex gap-4 text-sm">
-        <span>{noticia.fecha}</span>
+        <span>
+          {new Date(noticia.fecha).toLocaleDateString("es-PE")}
+        </span>
         <span>•</span>
         <span>{noticia.autor}</span>
       </p>
 
-      {/* --- SLIDER PRINCIPAL --- */}
-      <div className="relative mb-6">
-        <img
-          src={noticia.galeria[index].url}
-          onClick={() => setOpenModal(true)}
-          className="w-full h-96 object-cover rounded-xl cursor-pointer"
-        />
+      {galeria.length > 0 && (
+        <>
+          <div className="relative mb-6">
+            <img
+              src={galeria[index].url}
+              onClick={() => setOpenModal(true)}
+              className="w-full h-96 object-cover rounded-xl cursor-pointer"
+            />
 
-        {noticia.galeria.length > 1 && (
-          <>
-            <button
-              onClick={anterior}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
-            >
-              <ChevronLeft size={20} />
-            </button>
+            {galeria.length > 1 && (
+              <>
+                <button
+                  onClick={anterior}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
+                >
+                  <ChevronLeft size={20} />
+                </button>
 
-            <button
-              onClick={siguiente}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow cursor-pointer"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </>
-        )}
-      </div>
+                <button
+                  onClick={siguiente}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 rounded-full shadow"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </>
+            )}
+          </div>
 
-      {/* --- MINIATURAS --- */}
-      <div className="flex gap-3 mb-10 flex-wrap">
-        {noticia.galeria.map((img, i) => (
-          <img
-            key={i}
-            src={img.url}
-            onClick={() => setIndex(i)}
-            className={`w-28 h-20 object-cover rounded-lg cursor-pointer border transition ${i === index
-              ? "border-[#003566]"
-              : "border-transparent opacity-60 hover:opacity-100"
-              }`}
-          />
-        ))}
-      </div>
+          <div className="flex gap-3 mb-10 flex-wrap">
+            {galeria.map((img, i) => (
+              <img
+                key={i}
+                src={img.url}
+                onClick={() => setIndex(i)}
+                className={`w-28 h-20 object-cover rounded-lg cursor-pointer border transition ${
+                  i === index
+                    ? "border-[#003566]"
+                    : "border-transparent opacity-60 hover:opacity-100"
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
-      {/* --- CONTENIDO --- */}
       <article
         className="
           prose prose-gray max-w-none
@@ -106,19 +116,17 @@ const NoticiaDetalle = () => {
           prose-h3:text-[#003566]
           prose-p:leading-relaxed
         "
-        dangerouslySetInnerHTML={{ __html: noticia.contenido }}
-      />
+      >
+        {renderRichText(noticia.contenido)}
+      </article>
 
-      {/* --- MODAL IMAGENES --- */}
-      {openModal && (
+      {openModal && galeria.length > 0 && (
         <ModalGaleria
-          imagenes={noticia.galeria.map(img => img.url)}
+          imagenes={galeria.map(img => img.url)}
           initialIndex={index}
           onClose={() => setOpenModal(false)}
         />
       )}
-
-
     </div>
   );
 };

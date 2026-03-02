@@ -1,4 +1,7 @@
 export const perritosPerdidos = [
-  ["https://www.munilapunta.gob.pe/img/mascotas/mascotas_perdidos/1.png"],
-  ["https://www.munilapunta.gob.pe/img/mascotas/mascotas_perdidos/2.png"]
+ ["https://web.munilapunta.gob.pe//uploads/2_44dcfe66ed.png"],
+["https://web.munilapunta.gob.pe//uploads/1_2894a67277.png"]
 ];
+
+
+

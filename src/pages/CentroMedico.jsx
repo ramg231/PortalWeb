@@ -75,7 +75,7 @@ const CentroMedico = () => {
 
      
 
-      {/* Horarios */}
+      {/* Horarios 
       <section className="mb-14">
         <h2 className="text-2xl font-bold text-[#003566] mb-4">Horarios de Atención</h2>
 
@@ -92,9 +92,9 @@ const CentroMedico = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Documentos descargables */}
+      {/* Documentos descargables 
       <section>
         <h2 className="text-2xl font-bold text-[#003566] mb-4">
          Información adicional
@@ -119,8 +119,8 @@ const CentroMedico = () => {
             </a>
           ))}
         </div>
-      </section>
-    </div>
+      </section>*/}
+    </div> 
   );
 };
 

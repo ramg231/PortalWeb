@@ -21,6 +21,8 @@ import NormasEmitidas from '@/pages/NormasEmitidas'
 import TributosArbitrios from '@/pages/TributosArbitrios'
 import LicenciasFuncionamiento from '@/pages/LicenciasFuncionamiento'
 import LicenciasEdificacion from '@/pages/LicenciasEdificacion'
+import JuntasVecinales from '@/pages/EleccionesJuntasVecinales'
+import ModernizacionEstado from '@/pages/ModernizacionEstado'
 const App = () => {
   return (
     <>
@@ -36,7 +38,8 @@ const App = () => {
           <Route path="seguridad-ciudadana" element={<SeguridadCiudadana />} />
           <Route path="transparencia" element={<Transparencia />} />
           <Route path="noticias" element={<Noticias />} />
-          <Route path="noticias/:id" element={<NoticiaDetalle />} />
+         <Route path="noticias/:slug" element={<NoticiaDetalle />} />
+
           <Route path="campanias" element={<Campanias />} />
           <Route path="campanias/:id" element={<CampaniaDetalle />} />
           <Route path="alcalde" element={<Alcalde />} />
@@ -47,6 +50,8 @@ const App = () => {
           <Route path="tributos" element={<TributosArbitrios />} />
           <Route path="licencias-funcionamiento" element={<LicenciasFuncionamiento />} />
           <Route path="licencias-edificacion" element={<LicenciasEdificacion />} />
+          <Route path="juntas-vecinales" element={<JuntasVecinales />} />
+          <Route path="servir" element={<ModernizacionEstado />} />
         </Route>
       </Routes>
     </>
